@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Scanning — Sentinel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0a0f1e;--navy2:#111827;--navy3:#1a2235;--blue:#3b82f6;--blue-bright:#60a5fa;--blue-dim:rgba(59,130,246,.12);--green:#10b981;--green-dim:rgba(16,185,129,.12);--red:#ef4444;--red-dim:rgba(239,68,68,.12);--yellow:#f59e0b;--yellow-dim:rgba(245,158,11,.1);--text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,.08);--r:10px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+nav{background:rgba(10,15,30,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 6vw;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text)}
+.logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--blue),#818cf8);border-radius:7px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.lang-toggle{display:flex;align-items:center;background:var(--navy3);border:1px solid var(--border);border-radius:9999px;padding:3px;gap:2px}
+.lang-btn{padding:4px 11px;border-radius:9999px;font-size:.72rem;font-weight:600;letter-spacing:.05em;color:var(--muted);border:none;background:none;cursor:pointer;transition:all .2s}
+.lang-btn.active{background:var(--blue);color:#fff}
+
+/* ── Scan area ── */
+.scan-wrap{flex:1;max-width:760px;margin:0 auto;padding:48px 6vw;width:100%}
+.scan-header{text-align:center;margin-bottom:40px}
+.scan-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.02em}
+.scan-subtitle{font-size:.85rem;color:var(--muted)}
+
+/* ── Main progress ── */
+.progress-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:20px}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.progress-label{font-size:.78rem;font-weight:500;color:var(--muted)}
+.progress-pct{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--blue-bright)}
+.progress-track{height:8px;background:var(--navy3);border-radius:9999px;overflow:hidden;margin-bottom:10px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),#818cf8);border-radius:9999px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
+.progress-fill.scanning{background-size:200% 100%;animation:shimmer 1.8s linear infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.progress-counts{display:flex;gap:6px;font-size:.78rem;color:var(--muted)}
+.progress-counts strong{color:var(--text)}
+
+/* ── Scan modules ── */
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:500px){.modules-grid{grid-template-columns:1fr}}
+.module{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:18px 16px;display:flex;align-items:center;gap:14px;transition:border-color .4s}
+.module.active{border-color:rgba(59,130,246,.4)}
+.module.done-ok{border-color:rgba(16,185,129,.35)}
+.module.done-warn{border-color:rgba(245,158,11,.35)}
+.module-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;position:relative;transition:background .4s}
+.module-icon.scanning-pulse{animation:mod-pulse 1.5s ease-in-out infinite}
+@keyframes mod-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.module-body{flex:1;min-width:0}
+.module-name{font-size:.82rem;font-weight:500;color:var(--text);margin-bottom:3px}
+.module-status{font-size:.73rem;color:var(--muted);display:flex;align-items:center;gap:5px}
+.module-status .dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0}
+.module-status .dot.active{background:var(--blue-bright);animation:dot-blink 1s ease-in-out infinite}
+.module-status .dot.ok{background:var(--green)}
+.module-status .dot.warn{background:var(--yellow)}
+@keyframes dot-blink{0%,100%{opacity:1}50%{opacity:.2}}
+.module-tick{font-size:1rem;opacity:0;transition:opacity .4s}
+.module.done-ok .module-tick{opacity:1}
+
+/* ── Cycling text ── */
+.cycling-text{font-size:.73rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+
+/* ── Report ── */
+#report{display:none}
+.report-header{text-align:center;margin-bottom:32px;padding:28px;background:var(--navy2);border:1px solid var(--border);border-radius:14px}
+.report-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 16px;border-radius:9999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
+.report-badge.clean{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+.report-title{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.02em}
+.report-meta{font-size:.78rem;color:var(--muted)}
+.report-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:540px){.report-stats{grid-template-columns:repeat(2,1fr)}}
+.rstat{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center}
+.rstat-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:4px}
+.rstat-lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.report-sections{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.rsection{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:22px}
+.rsection-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rsection-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.rsection-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--text)}
+.rsection-verdict{margin-left:auto;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:9999px}
+.verdict-clean{background:var(--green-dim);color:#6ee7b7}
+.verdict-warn{background:var(--yellow-dim);color:#fcd34d}
+.rsection-body{font-size:.82rem;color:var(--muted);line-height:1.75}
+.rsection-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.rsection-list li{font-size:.81rem;color:var(--muted);padding-left:18px;position:relative;line-height:1.6}
+.rsection-list li::before{content:'·';position:absolute;left:0;color:var(--blue-bright)}
+.report-footer{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;font-size:.78rem;color:var(--muted)}
+.report-footer svg{flex-shrink:0;opacity:.5}
+.report-ts{margin-left:auto;font-size:.72rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    Sentinel
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<div class="scan-wrap">
+  <!-- Scan UI -->
+  <div id="scan-ui">
+    <div class="scan-header">
+      <div class="scan-title" id="scan-title">Scanning your inbox…</div>
+      <div class="scan-subtitle" id="scan-subtitle">Analysing messages for security threats. No content is read or stored.</div>
+    </div>
+
+    <div class="progress-card">
+      <div class="progress-top">
+        <span class="progress-label" id="prog-label">Scanning</span>
+        <span class="progress-pct" id="prog-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill scanning" id="prog-fill"></div></div>
+      <div class="progress-counts"><strong id="prog-done">0</strong>&nbsp;<span id="prog-of">of</span>&nbsp;<strong id="prog-total">—</strong>&nbsp;<span id="prog-emails">messages scanned</span></div>
+    </div>
+
+    <div class="modules-grid" id="modules-grid">
+      <div class="module active" id="mod-phishing">
+        <div class="module-icon scanning-pulse" style="background:rgba(239,68,68,.12)">🎣</div>
+        <div class="module-body">
+          <div class="module-name" data-i18n-mod="mod_phishing">Phishing Detection</div>
+          <div class="module-status"><span class="dot active" id="dot-phishing"></span><span class="cycling-text" id="cyc-phishing">Checking sender domains…</span></div>
+        </div>
+        <span class="module-tick">✓</span>
+      </div>
+      <div class="module active" id="mod-malware">
+        <div class="module-icon scanning-pulse" style="background:rgba(245,158,11,.1);animation-delay:.3s">🦠</div>
+        <div class="module-body">
+          <div class="module-name" data-i18n-mod="mod_malware">Malware Signatures</div>
+          <div class="module-status"><span class="dot active" id="dot-malware"></span><span class="cycling-text" id="cyc-malware">Scanning attachment metadata…</span></div>
+        </div>
+        <span class="module-tick">✓</span>
+      </div>
+      <div class="module active" id="mod-links">
+        <div class="module-icon scanning-pulse" style="background:rgba(59,130,246,.1);animation-delay:.6s">🔗</div>
+        <div class="module-body">
+          <div class="module-name" data-i18n-mod="mod_links">Suspicious Links</div>
+          <div class="module-status"><span class="dot active" id="dot-links"></span><span class="cycling-text" id="cyc-links">Resolving redirect chains…</span></div>
+        </div>
+        <span class="module-tick">✓</span>
+      </div>
+      <div class="module active" id="mod-spoof">
+        <div class="module-icon scanning-pulse" style="background:rgba(139,92,246,.1);animation-delay:.9s">🎭</div>
+        <div class="module-body">
+          <div class="module-name" data-i18n-mod="mod_spoof">Domain Spoofing</div>
+          <div class="module-status"><span class="dot active" id="dot-spoof"></span><span class="cycling-text" id="cyc-spoof">Verifying SPF / DKIM headers…</span></div>
+        </div>
+        <span class="module-tick">✓</span>
+      </div>
+      <div class="module active" id="mod-attach">
+        <div class="module-icon scanning-pulse" style="background:rgba(16,185,129,.1);animation-delay:1.2s">📎</div>
+        <div class="module-body">
+          <div class="module-name" data-i18n-mod="mod_attach">Dangerous Attachments</div>
+          <div class="module-status"><span class="dot active" id="dot-attach"></span><span class="cycling-text" id="cyc-attach">Identifying risky file types…</span></div>
+        </div>
+        <span class="module-tick">✓</span>
+      </div>
+      <div class="module active" id="mod-headers">
+        <div class="module-icon scanning-pulse" style="background:rgba(236,72,153,.1);animation-delay:1.5s">📋</div>
+        <div class="module-body">
+          <div class="module-name" data-i18n-mod="mod_headers">Header Analysis</div>
+          <div class="module-status"><span class="dot active" id="dot-headers"></span><span class="cycling-text" id="cyc-headers">Parsing routing metadata…</span></div>
+        </div>
+        <span class="module-tick">✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report -->
+  <div id="report">
+    <div class="report-header">
+      <div class="report-badge clean" id="report-badge">
+        <span>✓</span><span id="rpt-badge-text">Scan Complete</span>
+      </div>
+      <div class="report-title" id="rpt-title">Security Report</div>
+      <div class="report-meta" id="rpt-meta">Scan completed · No message content was read or stored</div>
+    </div>
+
+    <div class="report-stats">
+      <div class="rstat"><div class="rstat-val" style="color:var(--blue-bright)" id="rpt-total">0</div><div class="rstat-lbl" data-i18n="rpt_total">Scanned</div></div>
+      <div class="rstat"><div class="rstat-val" style="color:var(--green)" id="rpt-clean">0</div><div class="rstat-lbl" data-i18n="rpt_clean">Clean</div></div>
+      <div class="rstat"><div class="rstat-val" style="color:var(--red)" id="rpt-phish">0</div><div class="rstat-lbl" data-i18n="rpt_phish">Phishing</div></div>
+      <div class="rstat"><div class="rstat-val" style="color:var(--yellow)" id="rpt-malware">0</div><div class="rstat-lbl" data-i18n="rpt_malware">Malware</div></div>
+    </div>
+
+    <div class="report-sections">
+      <div class="rsection">
+        <div class="rsection-head">
+          <div class="rsection-icon" style="background:rgba(239,68,68,.1)">🎣</div>
+          <div class="rsection-title" data-i18n="rpt_phish_title">Phishing Analysis</div>
+          <div class="rsection-verdict verdict-clean" id="verdict-phish">Clean</div>
+        </div>
+        <div class="rsection-body" id="rpt-phish-body">
+          No phishing indicators were detected. Sender domains, authentication headers, and link patterns all appear consistent with legitimate mail.
+        </div>
+        <ul class="rsection-list">
+          <li data-i18n="phish_li1">Sender domain reputation: checked</li>
+          <li data-i18n="phish_li2">SPF / DKIM / DMARC header analysis: complete</li>
+          <li data-i18n="phish_li3">Look-alike domain detection: no matches found</li>
+          <li data-i18n="phish_li4">Credential-harvest link patterns: none detected</li>
+        </ul>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-head">
+          <div class="rsection-icon" style="background:rgba(245,158,11,.1)">🦠</div>
+          <div class="rsection-title" data-i18n="rpt_malware_title">Malware Analysis</div>
+          <div class="rsection-verdict verdict-clean" id="verdict-malware">Clean</div>
+        </div>
+        <div class="rsection-body" id="rpt-malware-body">
+          No malware signatures or dangerous attachment patterns were identified. Attachment metadata was checked against known threat indicators.
+        </div>
+        <ul class="rsection-list">
+          <li data-i18n="malware_li1">Attachment file-type analysis: complete</li>
+          <li data-i18n="malware_li2">Office macro indicators: none detected</li>
+          <li data-i18n="malware_li3">Executable or script attachments: none found</li>
+          <li data-i18n="malware_li4">Archive (ZIP/RAR) threat patterns: none detected</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="report-footer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span data-i18n="rpt_footer">Sentinel is a diagnostic tool. Results are based on metadata analysis only.</span>
+      <span class="report-ts" id="rpt-ts"></span>
+    </div>
+  </div>
+</div>
+
+<script src="/success.js"></script>
+<script>
+(function(){
+  var T={en:{scan_title:'Scanning your inbox…',scan_subtitle:'Analysing messages for security threats. No content is read or stored.',prog_of:'of',prog_emails:'messages scanned',mod_phishing:'Phishing Detection',mod_malware:'Malware Signatures',mod_links:'Suspicious Links',mod_spoof:'Domain Spoofing',mod_attach:'Dangerous Attachments',mod_headers:'Header Analysis',rpt_total:'Scanned',rpt_clean:'Clean',rpt_phish:'Phishing',rpt_malware:'Malware',rpt_phish_title:'Phishing Analysis',rpt_malware_title:'Malware Analysis',phish_li1:'Sender domain reputation: checked',phish_li2:'SPF / DKIM / DMARC header analysis: complete',phish_li3:'Look-alike domain detection: no matches found',phish_li4:'Credential-harvest link patterns: none detected',malware_li1:'Attachment file-type analysis: complete',malware_li2:'Office macro indicators: none detected',malware_li3:'Executable or script attachments: none found',malware_li4:'Archive (ZIP/RAR) threat patterns: none detected',rpt_footer:'Sentinel is a diagnostic tool. Results are based on metadata analysis only.',verdict_clean:'Clean',rpt_badge:'Scan Complete',rpt_title:'Security Report',rpt_meta:'Scan completed · No message content was read or stored'},es:{scan_title:'Analizando tu bandeja…',scan_subtitle:'Analizando mensajes en busca de amenazas de seguridad. No se lee ni almacena ningún contenido.',prog_of:'de',prog_emails:'mensajes analizados',mod_phishing:'Detección de Phishing',mod_malware:'Firmas de Malware',mod_links:'Enlaces Sospechosos',mod_spoof:'Suplantación de Dominio',mod_attach:'Adjuntos Peligrosos',mod_headers:'Análisis de Cabeceras',rpt_total:'Analizados',rpt_clean:'Limpios',rpt_phish:'Phishing',rpt_malware:'Malware',rpt_phish_title:'Análisis de Phishing',rpt_malware_title:'Análisis de Malware',phish_li1:'Reputación del dominio remitente: verificada',phish_li2:'Análisis de cabeceras SPF / DKIM / DMARC: completo',phish_li3:'Detección de dominios similares: no se encontraron coincidencias',phish_li4:'Patrones de enlaces de captura de credenciales: ninguno detectado',malware_li1:'Análisis del tipo de archivo adjunto: completo',malware_li2:'Indicadores de macros de Office: ninguno detectado',malware_li3:'Archivos ejecutables o scripts adjuntos: ninguno encontrado',malware_li4:'Patrones de amenazas en archivos comprimidos (ZIP/RAR): ninguno detectado',rpt_footer:'Sentinel es una herramienta de diagnóstico. Los resultados se basan únicamente en el análisis de metadatos.',verdict_clean:'Limpio',rpt_badge:'Análisis Completo',rpt_title:'Informe de Seguridad',rpt_meta:'Análisis completado · No se leyó ni almacenó ningún mensaje'}};
+  function setLang(l){
+    localStorage.setItem('sentinel_lang',l);
+    document.documentElement.setAttribute('data-lang',l);
+    document.getElementById('btn-en').classList.toggle('active',l==='en');
+    document.getElementById('btn-es').classList.toggle('active',l==='es');
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(T[l][k]!==undefined)el.textContent=T[l][k];});
+    window._lang=l; window._T=T;
+    // update scan title/subtitle live
+    var st=document.getElementById('scan-title'),ss=document.getElementById('scan-subtitle');
+    if(st&&T[l].scan_title)st.textContent=T[l].scan_title;
+    if(ss&&T[l].scan_subtitle)ss.textContent=T[l].scan_subtitle;
+    var pof=document.getElementById('prog-of'),pe=document.getElementById('prog-emails');
+    if(pof)pof.textContent=T[l].prog_of;
+    if(pe)pe.textContent=T[l].prog_emails;
+  }
+  window.setLang=setLang; window._T=T;
+  setLang(localStorage.getItem('sentinel_lang')||'en');
+}());
+</script>
+</body>
+</html>

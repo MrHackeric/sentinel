@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Error — Sentinel</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--gmail-red:#EA4335;--gmail-blue:#4285F4;--bg:#F6F8FC;--surface:#fff;--border:#E0E0E0;--text:#202124;--muted:#5F6368}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+@media(max-width:480px){.card{padding:32px 24px}}
+.icon{width:60px;height:60px;border-radius:50%;background:#fce8e6;display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.icon svg{stroke:var(--gmail-red);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+h1{font-family:'Google Sans',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:10px;color:var(--text)}
+p{font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--gmail-blue);color:#fff;padding:10px 24px;border-radius:4px;font-family:'Google Sans',sans-serif;font-weight:500;font-size:.875rem;text-decoration:none;transition:background .2s;box-shadow:0 1px 3px rgba(66,133,244,.3)}
+.btn:hover{background:#1a73e8}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">
+    <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  <h1>Something went wrong</h1>
+  <p>The connection could not be completed. This may be because access was denied or the session expired. Please try again.</p>
+  <a href="/apply" class="btn">Try again</a>
+</div>
+</body>
+</html>
