@@ -17,7 +17,7 @@ const { notFound, errorHandler }      = require('./middleware/errorHandler');
   fs.mkdirSync(path.resolve(d), { recursive: true })
 );
 
-// ── App ───────────────────────────────────────────────────────────────────────
+// ── App ── (Restart triggered)
 const app = express();
 
 // Trust proxy (needed for accurate req.ip when behind Nginx / reverse proxy)
@@ -35,7 +35,7 @@ app.use(helmet({
                     'https://fonts.gstatic.com'],
       // Google Fonts CSS is served from googleapis.com; actual font files from gstatic.com
       fontSrc:     ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
-      imgSrc:      ["'self'", 'data:'],
+      imgSrc:      ["'self'", 'data:', 'https://images.unsplash.com'],
       // connectSrc covers EventSource(/scan/stream) — same-origin so 'self' is sufficient
       connectSrc:    ["'self'"],
       frameSrc:      ["'none'"],

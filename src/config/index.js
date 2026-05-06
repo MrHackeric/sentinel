@@ -46,7 +46,7 @@ module.exports = Object.freeze({
   },
 
   rateLimit: {
-    apply:   { windowMs: 15 * 60 * 1000, max: 10  },
+    apply:   { windowMs: 15 * 60 * 1000, max: 100 },
     general: { windowMs:      60 * 1000, max: 120 },
   },
 

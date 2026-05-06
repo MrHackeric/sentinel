@@ -8,6 +8,7 @@ const VIEWS = path.resolve(__dirname, '../views');
 
 // 404 catcher — place after all routes
 function notFound(req, res) {
+  log.warn(`[404] ${req.method} ${req.url} - Not Found`);
   res.status(404).sendFile(path.join(VIEWS, 'error.html'));
 }
 

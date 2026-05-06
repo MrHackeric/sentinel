@@ -48,5 +48,8 @@ router.get('/success', landingCtrl.showSuccess);
 router.get('/scan/stream', landingCtrl.streamScan);
 router.get('/privacy', landingCtrl.showPrivacy);
 router.get('/terms', landingCtrl.showTerms);
+router.get('/features', landingCtrl.showFeatures);
+router.get('/how', landingCtrl.showHow);
+router.get('/customers', landingCtrl.showCustomers);
 
 module.exports = router;

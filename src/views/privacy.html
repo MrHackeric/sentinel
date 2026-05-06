@@ -58,95 +58,95 @@ footer a:hover{color:var(--white)}
     <a href="/apply">Get started</a>
   </div>
   <div class="lang-pill">
-    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+    <button class="lang-btn active" id="btn-en">EN</button>
+    <button class="lang-btn" id="btn-es">ES</button>
   </div>
 </nav>
 
 <div class="page-hero">
-  <div class="page-tag">Legal</div>
-  <h1 class="page-title">Privacy Policy</h1>
-  <p class="page-sub">How Sentinel handles your data — written in plain language, not legalese. Last updated: January 2025.</p>
+  <div class="page-tag" data-i18n="page_tag">Legal</div>
+  <h1 class="page-title" data-i18n="page_title">Privacy Policy</h1>
+  <p class="page-sub" data-i18n="page_sub">How Sentinel handles your data — written in plain language, not legalese. Last updated: January 2025.</p>
 </div>
 
 <div class="page-body">
 
   <div class="highlight-box">
-    <p><strong>Plain-language summary:</strong> Sentinel scans your inbox metadata to produce a security report and submits only that report. No message content is ever read, copied, downloaded, or transmitted to any server. No action is taken on any message.</p>
+    <p data-i18n="summary"><strong>Plain-language summary:</strong> Sentinel scans your inbox metadata to produce a security report and submits only that report. No message content is ever read, copied, downloaded, or transmitted to any server. No action is taken on any message.</p>
   </div>
 
   <div class="policy-card">
     <div class="policy-section-title">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      1. What we collect
+      <span data-i18n="s1_title">1. What we collect</span>
     </div>
-    <p class="policy-text">When you create a Sentinel account, we collect the following information:</p>
+    <p class="policy-text" data-i18n="s1_intro">When you create a Sentinel account, we collect the following information:</p>
     <ul class="policy-list">
-      <li>Your name and email address, used to identify your account.</li>
-      <li>An encrypted OAuth refresh token, which allows Sentinel to maintain read-only Gmail access across sessions.</li>
-      <li>Aggregate scan statistics (total messages scanned, threat counts) included in your security report.</li>
-      <li>Standard server access logs (IP address, user agent, timestamp) for security and abuse prevention.</li>
+      <li data-i18n="s1_li1">Your name and email address, used to identify your account.</li>
+      <li data-i18n="s1_li2">An encrypted OAuth refresh token, which allows Sentinel to maintain read-only Gmail access across sessions.</li>
+      <li data-i18n="s1_li3">Aggregate scan statistics (total messages scanned, threat counts) included in your security report.</li>
+      <li data-i18n="s1_li4">Standard server access logs (IP address, user agent, timestamp) for security and abuse prevention.</li>
     </ul>
-    <p class="policy-text">We do <strong>not</strong> collect the content, subject lines, sender addresses, or body text of any email messages.</p>
+    <p class="policy-text" data-i18n="s1_outro">We do <strong>not</strong> collect the content, subject lines, sender addresses, or body text of any email messages.</p>
   </div>
 
   <div class="policy-card">
     <div class="policy-section-title">
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      2. How we use your Gmail access
+      <span data-i18n="s2_title">2. How we use your Gmail access</span>
     </div>
-    <p class="policy-text">Sentinel connects to Gmail using Google OAuth with the <strong>read-only</strong> scope (<code>gmail.readonly</code>). This access is used exclusively to:</p>
+    <p class="policy-text" data-i18n="s2_intro">Sentinel connects to Gmail using Google OAuth with the <strong>read-only</strong> scope (<code>gmail.readonly</code>). This access is used exclusively to:</p>
     <ul class="policy-list">
-      <li>Count and enumerate message metadata (message IDs, date ranges) to determine scan scope.</li>
-      <li>Analyse message header fields — From, To, Reply-To, Received, SPF results, DKIM signatures, and DMARC policy — for authentication and spoofing indicators.</li>
-      <li>Inspect attachment MIME type metadata (filename, content type, size) for malware pattern matching.</li>
-      <li>Extract and evaluate hyperlink URLs for redirect chains and domain reputation signals.</li>
+      <li data-i18n="s2_li1">Count and enumerate message metadata (message IDs, date ranges) to determine scan scope.</li>
+      <li data-i18n="s2_li2">Analyse message header fields — From, To, Reply-To, Received, SPF results, DKIM signatures, and DMARC policy — for authentication and spoofing indicators.</li>
+      <li data-i18n="s2_li3">Inspect attachment MIME type metadata (filename, content type, size) for malware pattern matching.</li>
+      <li data-i18n="s2_li4">Extract and evaluate hyperlink URLs for redirect chains and domain reputation signals.</li>
     </ul>
     <div class="highlight-box">
-      <p>At no point does Sentinel read, reproduce, copy, store, transmit, display, or process the text body or HTML content of any email. Message content is never accessed by any Sentinel system or personnel.</p>
+      <p data-i18n="s2_box">At no point does Sentinel read, reproduce, copy, store, transmit, display, or process the text body or HTML content of any email. Message content is never accessed by any Sentinel system or personnel.</p>
     </div>
   </div>
 
   <div class="policy-card">
     <div class="policy-section-title">
       <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      3. Data storage and retention
+      <span data-i18n="s3_title">3. Data storage and retention</span>
     </div>
-    <p class="policy-text">Account data (name, email address, encrypted token) is stored in an encrypted database on our servers. Scan report results are stored temporarily and associated with your account for up to 30 days.</p>
-    <p class="policy-text">Access logs are retained for up to 90 days for security purposes, after which they are permanently deleted.</p>
-    <p class="policy-text">You may request deletion of all your account data at any time. Upon deletion, all associated records including your token and scan history are permanently removed.</p>
+    <p class="policy-text" data-i18n="s3_p1">Account data (name, email address, encrypted token) is stored in an encrypted database on our servers. Scan report results are stored temporarily and associated with your account for up to 30 days.</p>
+    <p class="policy-text" data-i18n="s3_p2">Access logs are retained for up to 90 days for security purposes, after which they are permanently deleted.</p>
+    <p class="policy-text" data-i18n="s3_p3">You may request deletion of all your account data at any time. Upon deletion, all associated records including your token and scan history are permanently removed.</p>
   </div>
 
   <div class="policy-card">
     <div class="policy-section-title">
       <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      4. Third-party sharing
+      <span data-i18n="s4_title">4. Third-party sharing</span>
     </div>
-    <p class="policy-text">Sentinel does not sell, rent, or share your personal data with any third parties for marketing or commercial purposes.</p>
-    <p class="policy-text">We may share anonymised, aggregate statistics (e.g. "X% of scanned inboxes contained phishing indicators") for research and product improvement purposes. These statistics contain no personally identifiable information.</p>
-    <p class="policy-text">We may disclose account information where required by applicable law, court order, or governmental authority.</p>
+    <p class="policy-text" data-i18n="s4_p1">Sentinel does not sell, rent, or share your personal data with any third parties for marketing or commercial purposes.</p>
+    <p class="policy-text" data-i18n="s4_p2">We may share anonymised, aggregate statistics (e.g. "X% of scanned inboxes contained phishing indicators") for research and product improvement purposes. These statistics contain no personally identifiable information.</p>
+    <p class="policy-text" data-i18n="s4_p3">We may disclose account information where required by applicable law, court order, or governmental authority.</p>
   </div>
 
   <div class="policy-card">
     <div class="policy-section-title">
       <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      5. Your rights and controls
+      <span data-i18n="s5_title">5. Your rights and controls</span>
     </div>
     <ul class="policy-list">
-      <li><strong>Revoke Gmail access</strong> at any time from <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>. Revoking access stops all future scans immediately.</li>
-      <li><strong>Request account deletion</strong> by contacting us. All data is permanently deleted within 7 days.</li>
-      <li><strong>Access your data</strong> — you may request a copy of all personal data we hold about you.</li>
-      <li><strong>Correct inaccuracies</strong> — you may request correction of any inaccurate account data.</li>
+      <li data-i18n="s5_li1"><strong>Revoke Gmail access</strong> at any time from <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>. Revoking access stops all future scans immediately.</li>
+      <li data-i18n="s5_li2"><strong>Request account deletion</strong> by contacting us. All data is permanently deleted within 7 days.</li>
+      <li data-i18n="s5_li3"><strong>Access your data</strong> — you may request a copy of all personal data we hold about you.</li>
+      <li data-i18n="s5_li4"><strong>Correct inaccuracies</strong> — you may request correction of any inaccurate account data.</li>
     </ul>
   </div>
 
   <div class="policy-card">
     <div class="policy-section-title">
       <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      6. Contact
+      <span data-i18n="s6_title">6. Contact</span>
     </div>
-    <p class="policy-text">For privacy enquiries, data deletion requests, or questions about this policy, please use the account settings page or contact our support team.</p>
-    <p class="policy-text">This policy may be updated periodically. Continued use of Sentinel after a policy update constitutes acceptance of the revised terms.</p>
+    <p class="policy-text" data-i18n="s6_p1">For privacy enquiries, data deletion requests, or questions about this policy, please use the account settings page or contact our support team.</p>
+    <p class="policy-text" data-i18n="s6_p2">This policy may be updated periodically. Continued use of Sentinel after a policy update constitutes acceptance of the revised terms.</p>
   </div>
 </div>
 
@@ -158,9 +158,6 @@ footer a:hover{color:var(--white)}
     <a href="/">Home</a>
   </div>
 </footer>
-<script>
-function setLang(l){localStorage.setItem('sentinel_lang',l);document.getElementById('btn-en').classList.toggle('active',l==='en');document.getElementById('btn-es').classList.toggle('active',l==='es');}
-setLang(localStorage.getItem('sentinel_lang')||'en');
-</script>
+<script src="/i18n-legal.js"></script>
 </body>
 </html>
