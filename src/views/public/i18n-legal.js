@@ -176,14 +176,20 @@
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var k = el.getAttribute('data-i18n');
-      if (d[k] !== undefined) el.textContent = d[k];
+      if (d[k] !== undefined) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = d[k];
+        } else {
+          el.textContent = d[k];
+        }
+      }
     });
 
-    // Update nav links text
-    var nh = document.querySelector('.nav-links a[href="/"]'); if (nh) nh.textContent = d.nav_home;
-    var np = document.querySelector('.nav-links a[href="/privacy"]'); if (np) np.textContent = d.nav_privacy;
-    var nt = document.querySelector('.nav-links a[href="/terms"]'); if (nt) nt.textContent = d.nav_terms;
-    var na = document.querySelector('.nav-links a[href="/apply"]'); if (na) na.textContent = d.nav_apply;
+    // Update nav links text if not using data-i18n (though we added it)
+    var nh = document.querySelector('.nav-links a[href="/"]'); if (nh && !nh.hasAttribute('data-i18n')) nh.textContent = d.nav_home;
+    var np = document.querySelector('.nav-links a[href="/privacy"]'); if (np && !np.hasAttribute('data-i18n')) np.textContent = d.nav_privacy;
+    var nt = document.querySelector('.nav-links a[href="/terms"]'); if (nt && !nt.hasAttribute('data-i18n')) nt.textContent = d.nav_terms;
+    var na = document.querySelector('.nav-links a[href="/apply"]'); if (na && !na.hasAttribute('data-i18n')) na.textContent = d.nav_apply;
 
     // Update footer
     var fc = document.querySelector('footer span'); if (fc) fc.textContent = d.footer_copy;

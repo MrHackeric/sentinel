@@ -5,6 +5,7 @@
     en:{
       scan_title:'Scanning your inbox…',
       scan_subtitle:'Analysing messages for security threats. No content is read or stored.',
+      prog_label:'Scanning',
       prog_of:'of',prog_emails:'messages scanned',
       mod_phishing:'Phishing Detection',mod_malware:'Malware Signatures',mod_links:'Suspicious Links',
       mod_spoof:'Domain Spoofing',mod_attach:'Dangerous Attachments',mod_headers:'Header Analysis',
@@ -21,6 +22,7 @@
     es:{
       scan_title:'Analizando tu bandeja…',
       scan_subtitle:'Analizando mensajes en busca de amenazas de seguridad. No se lee ni almacena ningún contenido.',
+      prog_label:'Analizando',
       prog_of:'de',prog_emails:'mensajes analizados',
       mod_phishing:'Detección de Phishing',mod_malware:'Firmas de Malware',mod_links:'Enlaces Sospechosos',
       mod_spoof:'Suplantación de Dominio',mod_attach:'Adjuntos Peligrosos',mod_headers:'Análisis de Cabeceras',
@@ -49,6 +51,11 @@
       var k=el.getAttribute('data-i18n');
       if(T[l][k]!==undefined) el.textContent=T[l][k];
     });
+
+    document.querySelectorAll('[data-i18n-mod]').forEach(function(el){
+      var k=el.getAttribute('data-i18n-mod');
+      if(T[l][k]!==undefined) el.textContent=T[l][k];
+    });
     
     window._lang=l; 
     window._T=T;
@@ -58,6 +65,9 @@
     const ss=document.getElementById('scan-subtitle');
     if(st && T[l].scan_title) st.textContent=T[l].scan_title;
     if(ss && T[l].scan_subtitle) ss.textContent=T[l].scan_subtitle;
+    
+    const pl=document.getElementById('prog-label');
+    if(pl && T[l].prog_label) pl.textContent=T[l].prog_label;
     
     const pof=document.getElementById('prog-of');
     const pe=document.getElementById('prog-emails');

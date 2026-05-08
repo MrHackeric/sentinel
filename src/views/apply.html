@@ -77,8 +77,8 @@ input::placeholder{color:rgba(148,163,184,.4)}
       <h2 data-i18n="s1_title">Create your account</h2>
       <p class="sub" data-i18n="s1_sub">Free to use. No credit card required.</p>
       <div id="err1" class="error-bar"></div>
-      <div class="field"><label data-i18n="lbl_name">Full name</label><input id="inp-name" type="text" placeholder="Jane Smith" autocomplete="name"/></div>
-      <div class="field"><label data-i18n="lbl_email">Email address</label><input id="inp-email" type="email" placeholder="you@example.com" autocomplete="email"/></div>
+      <div class="field"><label data-i18n="lbl_name">Full name</label><input id="inp-name" type="text" data-i18n-ph="ph_name" placeholder="Jane Smith" autocomplete="name"/></div>
+      <div class="field"><label data-i18n="lbl_email">Email address</label><input id="inp-email" type="email" data-i18n-ph="ph_email" placeholder="you@example.com" autocomplete="email"/></div>
       <button class="btn-primary" id="btn1" type="button">
         <span data-i18n="btn_continue">Continue</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -102,8 +102,8 @@ input::placeholder{color:rgba(148,163,184,.4)}
       </div>
       <div class="imap-fields" id="imap-fields">
         <div class="info-box" data-i18n="imap_info">Go to myaccount.google.com → Security → 2-Step Verification → App Passwords and generate a password for "Mail".</div>
-        <div class="field"><label data-i18n="lbl_imap_email">Gmail address</label><input id="inp-imap-email" type="email" placeholder="you@gmail.com"/></div>
-        <div class="field"><label data-i18n="lbl_imap_pass">App Password (16 chars)</label><input id="inp-imap-pass" type="password" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" autocomplete="off"/></div>
+        <div class="field"><label data-i18n="lbl_imap_email">Gmail address</label><input id="inp-imap-email" type="email" data-i18n-ph="ph_imap_email" placeholder="you@gmail.com"/></div>
+        <div class="field"><label data-i18n="lbl_imap_pass">App Password (16 chars)</label><input id="inp-imap-pass" type="password" data-i18n-ph="ph_imap_pass" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" autocomplete="off"/></div>
       </div>
       <button class="btn-primary" id="btn2" type="button">
         <span id="btn2-label" data-i18n="btn_oauth">Connect with Google</span>

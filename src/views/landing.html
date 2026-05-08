@@ -448,11 +448,11 @@ footer{
     Sentinel
   </div>
   <div class="nav-links">
-    <a href="/features">Features</a>
-    <a href="/how">How it works</a>
-    <a href="/customers">Customers</a>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Use</a>
+    <a href="/features" data-i18n="nav_features">Features</a>
+    <a href="/how" data-i18n="nav_how">How it works</a>
+    <a href="/customers" data-i18n="nav_customers">Customers</a>
+    <a href="/privacy" data-i18n="nav_privacy">Privacy Policy</a>
+    <a href="/terms" data-i18n="nav_terms">Terms of Use</a>
   </div>
   <div class="nav-right">
     <div class="lang-pill">
@@ -507,15 +507,15 @@ footer{
         </div>
         <div class="orbit-badge b1">
           <span class="orbit-badge-dot" style="background:#34a853"></span>
-          <span>Threat scan active</span>
+          <span data-i18n="badge1">Threat scan active</span>
         </div>
         <div class="orbit-badge b2">
           <span class="orbit-badge-dot" style="background:#4285f4"></span>
-          <span>SPF / DKIM verified</span>
+          <span data-i18n="badge2">SPF / DKIM verified</span>
         </div>
         <div class="orbit-badge b3">
           <span class="orbit-badge-dot" style="background:#fbbc04"></span>
-          <span>3 warnings flagged</span>
+          <span data-i18n="badge3">3 warnings flagged</span>
         </div>
       </div>
     </div>
@@ -671,7 +671,7 @@ footer{
       <div class="gallery-overlay">
         <div class="gallery-tag">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Phishing
+          <span data-i18n="gal_t1">Phishing</span>
         </div>
         <div class="gallery-title" id="g1t">Credential harvest campaigns targeting enterprise accounts</div>
       </div>
@@ -681,7 +681,7 @@ footer{
       <div class="gallery-overlay">
         <div class="gallery-tag">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-          Malware
+          <span data-i18n="gal_t2">Malware</span>
         </div>
         <div class="gallery-title" id="g2t">Macro-enabled Office documents used as malware delivery vectors</div>
       </div>
@@ -691,7 +691,7 @@ footer{
       <div class="gallery-overlay">
         <div class="gallery-tag">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Domain Spoofing
+          <span data-i18n="gal_t3">Domain Spoofing</span>
         </div>
         <div class="gallery-title" id="g3t">Lookalike domain attacks bypassing traditional spam filters</div>
       </div>
@@ -874,19 +874,19 @@ footer{
         <p id="footer-brand-txt">AI-powered Gmail security intelligence. Deep threat analysis with zero footprint on your messages.</p>
       </div>
       <div class="footer-col">
-        <h4 id="fc1h">Product</h4>
+        <h4 id="fc1h" data-i18n="footer_prod">Product</h4>
         <ul>
-          <li><a href="/features" id="fc1-1">Features</a></li>
-          <li><a href="/how" id="fc1-2">How it works</a></li>
-          <li><a href="/customers" id="fc1-3">Customers</a></li>
-          <li><a href="/apply" id="fc1-4">Get started</a></li>
+          <li><a href="/features" id="fc1-1" data-i18n="footer_feat">Features</a></li>
+          <li><a href="/how" id="fc1-2" data-i18n="footer_how">How it works</a></li>
+          <li><a href="/customers" id="fc1-3" data-i18n="footer_cust">Customers</a></li>
+          <li><a href="/apply" id="fc1-4" data-i18n="footer_apply">Get started</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4 id="fc2h">Legal</h4>
+        <h4 id="fc2h" data-i18n="footer_legal">Legal</h4>
         <ul>
-          <li><a href="/privacy" id="fc2-1">Privacy Policy</a></li>
-          <li><a href="/terms" id="fc2-2">Terms of Use</a></li>
+          <li><a href="/privacy" id="fc2-1" data-i18n="footer_privacy">Privacy Policy</a></li>
+          <li><a href="/terms" id="fc2-2" data-i18n="footer_terms">Terms of Use</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -908,5 +908,6 @@ footer{
 </footer>
 
 <script src="/landing.js"></script>
+<script src="/i18n-landing.js"></script>
 </body>
 </html>
