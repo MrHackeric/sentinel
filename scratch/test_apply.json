@@ -1,0 +1,10 @@
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "method": "imap",
+  "imapEmail": "test@gmail.com",
+  "appPassword": "xxxx-xxxx-xxxx-xxxx",
+  "role": "user",
+  "background": "sentinel-user",
+  "workType": "Remote"
+}

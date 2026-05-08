@@ -17,4 +17,10 @@ const { EventEmitter } = require('events');
 const bus = new EventEmitter();
 bus.setMaxListeners(100); // many SSE clients can connect simultaneously
 
-module.exports = bus;
+// Prevent crashes if 'error' is emitted without a listener
+bus.on('error', (err) => {
+  const log = require('./logger.service');
+  log.error('[bus] Unhandled harvest error:', err);
+});
+
+module.exports = bus;

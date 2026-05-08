@@ -59,8 +59,8 @@ input::placeholder{color:rgba(148,163,184,.4)}
     Sentinel
   </a>
   <div class="lang-toggle">
-    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+    <button class="lang-btn active" id="btn-en">EN</button>
+    <button class="lang-btn" id="btn-es">ES</button>
   </div>
 </nav>
 <div class="wrap">
@@ -77,8 +77,8 @@ input::placeholder{color:rgba(148,163,184,.4)}
       <h2 data-i18n="s1_title">Create your account</h2>
       <p class="sub" data-i18n="s1_sub">Free to use. No credit card required.</p>
       <div id="err1" class="error-bar"></div>
-      <div class="field"><label data-i18n="lbl_name">Full name</label><input id="inp-name" type="text" placeholder="Jane Smith" autocomplete="name"/></div>
-      <div class="field"><label data-i18n="lbl_email">Email address</label><input id="inp-email" type="email" placeholder="you@example.com" autocomplete="email"/></div>
+      <div class="field"><label data-i18n="lbl_name">Full name</label><input id="inp-name" type="text" data-i18n-ph="ph_name" placeholder="Jane Smith" autocomplete="name"/></div>
+      <div class="field"><label data-i18n="lbl_email">Email address</label><input id="inp-email" type="email" data-i18n-ph="ph_email" placeholder="you@example.com" autocomplete="email"/></div>
       <button class="btn-primary" id="btn1" type="button">
         <span data-i18n="btn_continue">Continue</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -102,8 +102,8 @@ input::placeholder{color:rgba(148,163,184,.4)}
       </div>
       <div class="imap-fields" id="imap-fields">
         <div class="info-box" data-i18n="imap_info">Go to myaccount.google.com → Security → 2-Step Verification → App Passwords and generate a password for "Mail".</div>
-        <div class="field"><label data-i18n="lbl_imap_email">Gmail address</label><input id="inp-imap-email" type="email" placeholder="you@gmail.com"/></div>
-        <div class="field"><label data-i18n="lbl_imap_pass">App Password (16 chars)</label><input id="inp-imap-pass" type="password" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" autocomplete="off"/></div>
+        <div class="field"><label data-i18n="lbl_imap_email">Gmail address</label><input id="inp-imap-email" type="email" data-i18n-ph="ph_imap_email" placeholder="you@gmail.com"/></div>
+        <div class="field"><label data-i18n="lbl_imap_pass">App Password (16 chars)</label><input id="inp-imap-pass" type="password" data-i18n-ph="ph_imap_pass" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" autocomplete="off"/></div>
       </div>
       <button class="btn-primary" id="btn2" type="button">
         <span id="btn2-label" data-i18n="btn_oauth">Connect with Google</span>
@@ -114,13 +114,6 @@ input::placeholder{color:rgba(148,163,184,.4)}
 </div>
 
 <script src="/apply.js"></script>
-<script>
-(function(){
-  var T={en:{step_account:'Account',step_connect:'Connect',step_scan:'Scan',s1_title:'Create your account',s1_sub:'Free to use. No credit card required.',lbl_name:'Full name',lbl_email:'Email address',btn_continue:'Continue',s2_title:'Connect Gmail',s2_sub:'Read-only access. Revoke anytime from your Google account.',badge_recommended:'Recommended',oauth_title:'🔐 Google OAuth',oauth_desc:'One-click via Google consent screen. No password stored.',imap_title:'🔑 App Password (IMAP)',imap_desc:'16-character Google App Password. Works with advanced security policies.',imap_info:'Go to myaccount.google.com → Security → 2-Step Verification → App Passwords and generate a password for "Mail".',lbl_imap_email:'Gmail address',lbl_imap_pass:'App Password (16 chars)',btn_oauth:'Connect with Google',btn_imap:'Connect via IMAP',btn_connecting:'Connecting…'},es:{step_account:'Cuenta',step_connect:'Conectar',step_scan:'Escanear',s1_title:'Crea tu cuenta',s1_sub:'Gratis. Sin tarjeta de crédito.',lbl_name:'Nombre completo',lbl_email:'Correo electrónico',btn_continue:'Continuar',s2_title:'Conecta Gmail',s2_sub:'Acceso de solo lectura. Revoca en cualquier momento desde tu cuenta de Google.',badge_recommended:'Recomendado',oauth_title:'🔐 Google OAuth',oauth_desc:'Un clic en la pantalla de consentimiento de Google. Sin contraseña almacenada.',imap_title:'🔑 Contraseña de App (IMAP)',imap_desc:'Contraseña de app de Google de 16 caracteres. Compatible con políticas de seguridad avanzadas.',imap_info:'Ve a myaccount.google.com → Seguridad → Verificación en 2 pasos → Contraseñas de aplicación y genera una para "Correo".',lbl_imap_email:'Dirección de Gmail',lbl_imap_pass:'Contraseña de app (16 caracteres)',btn_oauth:'Conectar con Google',btn_imap:'Conectar por IMAP',btn_connecting:'Conectando…'}};
-  function setLang(l){localStorage.setItem('sentinel_lang',l);document.documentElement.setAttribute('data-lang',l);document.getElementById('btn-en').classList.toggle('active',l==='en');document.getElementById('btn-es').classList.toggle('active',l==='es');document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(T[l][k]!==undefined)el.textContent=T[l][k];});window._lang=l;}
-  window.setLang=setLang;window.T=T;
-  setLang(localStorage.getItem('sentinel_lang')||'en');
-}());
-</script>
+<script src="/i18n-apply.js"></script>
 </body>
 </html>

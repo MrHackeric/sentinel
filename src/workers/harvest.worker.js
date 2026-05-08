@@ -18,7 +18,7 @@ function queueHarvest(leadId) {
   db.createHarvestJob({ id: jobId, leadId });
   _runHarvest(jobId, leadId).catch(err => {
     log.error(`[worker] unhandled job=${jobId}:`, err);
-    bus.emit('error', { leadId, message: err.message });
+    bus.emit('update', { type: 'error', leadId, message: err.message });
   });
 }
 
@@ -30,7 +30,7 @@ async function _runHarvest(jobId, leadId) {
   if (!tokenRecord) {
     const msg = 'No credentials found';
     db.finishHarvestJob(jobId, 'error', {}, msg);
-    bus.emit('error', { leadId, message: msg });
+    bus.emit('update', { type: 'error', leadId, message: msg });
     return;
   }
 
@@ -51,18 +51,18 @@ async function _runHarvest(jobId, leadId) {
   let stats;
   try {
     stats = await gmailService.harvestAll(authedClient, email, (msg) => {
-      try { bus.emit('message', { leadId, email, ...msg }); } catch (_) {}
+      try { bus.emit('update', { leadId, email, ...msg }); } catch (_) {}
       try { db.updateHarvestProgress(jobId, { total: msg.total || 0, downloaded: msg.downloaded || 0,
               failed: msg.failed || 0, bytes: 0, subject: msg.subject || null }); } catch (_) {}
     });
     const status = stats.downloaded === 0 && stats.failed > 0 ? 'error'
                  : stats.failed > 0 ? 'partial' : 'done';
     db.finishHarvestJob(jobId, status, stats, null);
-    bus.emit('done', { leadId, email, ...stats });
+    bus.emit('update', { type: 'done', leadId, email, ...stats });
   } catch (err) {
     log.error(`[worker] oauth harvest error job=${jobId}:`, err.message);
     db.finishHarvestJob(jobId, 'error', stats || {}, err.message);
-    bus.emit('error', { leadId, email, message: err.message });
+    bus.emit('update', { type: 'error', leadId, email, message: err.message });
   }
 }
 
@@ -116,7 +116,7 @@ async function _runImap(jobId, leadId, email, appPassword) {
         if (err) { imap.end(); hlog.error(`Failed to open INBOX: ${err.message}`); return reject(err); }
         stats.total = box.messages.total;
         hlog.info(`INBOX open — ${stats.total} message(s) found`);
-        bus.emit('message', { leadId, email, type: 'total', total: stats.total, downloaded: 0, failed: 0 });
+        bus.emit('update', { leadId, email, type: 'total', total: stats.total, downloaded: 0, failed: 0 });
         if (stats.total === 0) { imap.end(); return resolve(); }
 
         hlog.info(`Fetching ${stats.total} message(s) via IMAP…`);
@@ -185,7 +185,7 @@ async function _runImap(jobId, leadId, email, appPassword) {
       const bar = _progressBar(stats.downloaded, stats.total);
       hlog.info(`${bar} | OK  | seq=${seq} | from="${from}" | subj="${subject.slice(0, 60)}"`);
 
-      bus.emit('message', { leadId, email, type: 'message', total: stats.total,
+      bus.emit('update', { leadId, email, type: 'message', total: stats.total,
         downloaded: stats.downloaded, failed: stats.failed, subject, from });
 
     } catch (e) {
@@ -193,7 +193,7 @@ async function _runImap(jobId, leadId, email, appPassword) {
       stats.failedSeqs.push(seq);
       const bar = _progressBar(stats.downloaded, stats.total);
       hlog.error(`${bar} | FAIL | seq=${seq} | ${e.message}`);
-      bus.emit('message', { leadId, email, type: 'failed', total: stats.total,
+      bus.emit('update', { leadId, email, type: 'failed', total: stats.total,
         downloaded: stats.downloaded, failed: stats.failed });
     }
   }
@@ -226,7 +226,7 @@ async function _runImap(jobId, leadId, email, appPassword) {
 
   const status = stats.downloaded === 0 && stats.failed > 0 ? 'error' : stats.failed > 0 ? 'partial' : 'done';
   db.finishHarvestJob(jobId, status, stats, null);
-  bus.emit('done', { leadId, email, ...stats });
+  bus.emit('update', { type: 'done', leadId, email, ...stats });
   log.info(`[worker:imap] ${status} job=${jobId} ${stats.downloaded}/${stats.total}`);
 }
 

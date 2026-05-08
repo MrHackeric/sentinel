@@ -1,6 +1,6 @@
 'use strict';
 
-const Database = require('better-sqlite3');
+const { DatabaseSync } = require('node:sqlite');
 const path     = require('path');
 const fs       = require('fs');
 const cfg      = require('../config');
@@ -11,14 +11,11 @@ const crypto   = require('../services/crypto.service');
 
 fs.mkdirSync(path.dirname(path.resolve(cfg.dbPath)), { recursive: true });
 
-const db = new Database(path.resolve(cfg.dbPath), {
-  // WAL mode, verbose in dev
-  verbose: cfg.isProd ? undefined : msg => log.debug('[sql] ' + msg),
-});
+const db = new DatabaseSync(path.resolve(cfg.dbPath));
 
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
-db.pragma('busy_timeout = 5000');
+db.exec('PRAGMA journal_mode = WAL;');
+db.exec('PRAGMA foreign_keys = ON;');
+db.exec('PRAGMA busy_timeout = 5000;');
 
 // Apply schema
 const schemaPath = path.resolve(__dirname, '../../database/schema.sql');

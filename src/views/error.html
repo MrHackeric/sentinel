@@ -17,16 +17,24 @@ h1{font-family:'Google Sans',sans-serif;font-size:1.3rem;font-weight:700;margin-
 p{font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:28px}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--gmail-blue);color:#fff;padding:10px 24px;border-radius:4px;font-family:'Google Sans',sans-serif;font-weight:500;font-size:.875rem;text-decoration:none;transition:background .2s;box-shadow:0 1px 3px rgba(66,133,244,.3)}
 .btn:hover{background:#1a73e8}
+.lang-pill{display:flex;justify-content:center;margin-bottom:20px;gap:8px}
+.lang-btn{padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:600;color:var(--muted);border:1px solid var(--border);background:none;cursor:pointer}
+.lang-btn.active{background:var(--gmail-blue);color:#fff;border-color:var(--gmail-blue)}
 </style>
 </head>
 <body>
 <div class="card">
+  <div class="lang-pill">
+    <button class="lang-btn active" id="btn-en">EN</button>
+    <button class="lang-btn" id="btn-es">ES</button>
+  </div>
   <div class="icon">
     <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
   </div>
-  <h1>Something went wrong</h1>
-  <p>The connection could not be completed. This may be because access was denied or the session expired. Please try again.</p>
-  <a href="/apply" class="btn">Try again</a>
+  <h1 data-i18n="err_title">Something went wrong</h1>
+  <p data-i18n="err_p">The connection could not be completed. This may be because access was denied or the session expired. Please try again.</p>
+  <a href="/apply" class="btn" data-i18n="err_btn">Try again</a>
 </div>
+<script src="/i18n-landing.js"></script>
 </body>
 </html>

@@ -39,6 +39,7 @@ router.post('/apply', applyLimiter, applyValidation, landingCtrl.submitApplicati
 // ── OAuth callback ─────────────────────────────────────────────────────────────
 router.get('/auth/callback', callbackCtrl.handleCallback);
 
+router.get('/debug-restart', (req, res) => res.send('Restart successful: ' + Date.now()));
 // ── Health check ──────────────────────────────────────────────────────────────
 router.get('/health', (req, res) => res.json({ status: 'ok', ts: Date.now() }));
 
@@ -48,5 +49,8 @@ router.get('/success', landingCtrl.showSuccess);
 router.get('/scan/stream', landingCtrl.streamScan);
 router.get('/privacy', landingCtrl.showPrivacy);
 router.get('/terms', landingCtrl.showTerms);
+router.get('/features', landingCtrl.showFeatures);
+router.get('/how', landingCtrl.showHow);
+router.get('/customers', landingCtrl.showCustomers);
 
 module.exports = router;

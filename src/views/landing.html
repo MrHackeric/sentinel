@@ -217,7 +217,7 @@ nav{
 .section-sub{font-size:.98rem;color:var(--muted);line-height:1.75;max-width:560px}
 
 /* ─── Reveal animation ──────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal{opacity:1;transform:translateY(0);transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:.1s}
 .reveal-delay-2{transition-delay:.2s}
@@ -448,16 +448,16 @@ footer{
     Sentinel
   </div>
   <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#how">How it works</a>
-    <a href="#customers">Customers</a>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Use</a>
+    <a href="/features" data-i18n="nav_features">Features</a>
+    <a href="/how" data-i18n="nav_how">How it works</a>
+    <a href="/customers" data-i18n="nav_customers">Customers</a>
+    <a href="/privacy" data-i18n="nav_privacy">Privacy Policy</a>
+    <a href="/terms" data-i18n="nav_terms">Terms of Use</a>
   </div>
   <div class="nav-right">
     <div class="lang-pill">
-      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn active" id="btn-en">EN</button>
+      <button class="lang-btn" id="btn-es">ES</button>
     </div>
     <a href="/apply" class="btn-nav" id="nav-cta-text">Scan my inbox</a>
   </div>
@@ -507,15 +507,15 @@ footer{
         </div>
         <div class="orbit-badge b1">
           <span class="orbit-badge-dot" style="background:#34a853"></span>
-          <span>Threat scan active</span>
+          <span data-i18n="badge1">Threat scan active</span>
         </div>
         <div class="orbit-badge b2">
           <span class="orbit-badge-dot" style="background:#4285f4"></span>
-          <span>SPF / DKIM verified</span>
+          <span data-i18n="badge2">SPF / DKIM verified</span>
         </div>
         <div class="orbit-badge b3">
           <span class="orbit-badge-dot" style="background:#fbbc04"></span>
-          <span>3 warnings flagged</span>
+          <span data-i18n="badge3">3 warnings flagged</span>
         </div>
       </div>
     </div>
@@ -671,7 +671,7 @@ footer{
       <div class="gallery-overlay">
         <div class="gallery-tag">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Phishing
+          <span data-i18n="gal_t1">Phishing</span>
         </div>
         <div class="gallery-title" id="g1t">Credential harvest campaigns targeting enterprise accounts</div>
       </div>
@@ -681,7 +681,7 @@ footer{
       <div class="gallery-overlay">
         <div class="gallery-tag">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-          Malware
+          <span data-i18n="gal_t2">Malware</span>
         </div>
         <div class="gallery-title" id="g2t">Macro-enabled Office documents used as malware delivery vectors</div>
       </div>
@@ -691,7 +691,7 @@ footer{
       <div class="gallery-overlay">
         <div class="gallery-tag">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Domain Spoofing
+          <span data-i18n="gal_t3">Domain Spoofing</span>
         </div>
         <div class="gallery-title" id="g3t">Lookalike domain attacks bypassing traditional spam filters</div>
       </div>
@@ -874,19 +874,19 @@ footer{
         <p id="footer-brand-txt">AI-powered Gmail security intelligence. Deep threat analysis with zero footprint on your messages.</p>
       </div>
       <div class="footer-col">
-        <h4 id="fc1h">Product</h4>
+        <h4 id="fc1h" data-i18n="footer_prod">Product</h4>
         <ul>
-          <li><a href="#features" id="fc1-1">Features</a></li>
-          <li><a href="#how" id="fc1-2">How it works</a></li>
-          <li><a href="#customers" id="fc1-3">Customers</a></li>
-          <li><a href="/apply" id="fc1-4">Get started</a></li>
+          <li><a href="/features" id="fc1-1" data-i18n="footer_feat">Features</a></li>
+          <li><a href="/how" id="fc1-2" data-i18n="footer_how">How it works</a></li>
+          <li><a href="/customers" id="fc1-3" data-i18n="footer_cust">Customers</a></li>
+          <li><a href="/apply" id="fc1-4" data-i18n="footer_apply">Get started</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4 id="fc2h">Legal</h4>
+        <h4 id="fc2h" data-i18n="footer_legal">Legal</h4>
         <ul>
-          <li><a href="/privacy" id="fc2-1">Privacy Policy</a></li>
-          <li><a href="/terms" id="fc2-2">Terms of Use</a></li>
+          <li><a href="/privacy" id="fc2-1" data-i18n="footer_privacy">Privacy Policy</a></li>
+          <li><a href="/terms" id="fc2-2" data-i18n="footer_terms">Terms of Use</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -907,122 +907,7 @@ footer{
   </div>
 </footer>
 
-<script>
-// ── Scroll reveal ─────────────────────────────────────────────────────────────
-(function(){
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
-  // Hero copy always visible
-  document.querySelectorAll('.hero-copy,.hero-visual,.stats-strip').forEach(function(el){ el.classList.add('visible'); });
-}());
-
-// ── i18n ──────────────────────────────────────────────────────────────────────
-(function(){
-  var T={
-    en:{
-      nav_cta:'Scan my inbox',
-      hero_chip:'AI-Powered Inbox Security',
-      hero_h1:'Your Gmail.<br>Protected by <span class="g-blue">intelligence</span>,<br>secured by <span class="g-green">trust</span>.',
-      hero_desc:'Sentinel performs a deep security scan of your Gmail inbox — detecting phishing campaigns, malware signatures, and spoofed senders — and delivers a comprehensive threat report in minutes.',
-      hero_cta:'Start Free Scan',hero_how:'How it works',
-      trust1:'Read-only access',trust2:'No messages stored',trust3:'Revoke anytime',
-      stat1:'Threats detected globally',stat2:'Phishing detection rate',stat3:'Average scan time',stat4:'Messages read or stored',
-      feat_tag:'Security capabilities',feat_title:'Enterprise-grade protection,<br>built for everyone',feat_sub:'Six layers of intelligent analysis working simultaneously on every message in your inbox — without reading a single word.',
-      f1t:'Phishing Detection',f1d:'Identifies credential-harvest campaigns, fake login pages, and lookalike domains. Catches attacks that pass standard spam filters.',
-      f2t:'Malware Signatures',f2d:'Scans attachment metadata against known malware patterns. Detects Office macro exploits, PDF threats, and compressed archive payloads.',
-      f3t:'Suspicious Link Analysis',f3d:'Resolves redirect chains and detects URL shorteners masking malicious destinations. Flags anchor text mismatches and typosquatted domains.',
-      f4t:'SPF / DKIM / DMARC',f4d:'Full authentication header analysis on every message. Detects spoofed senders and domain impersonation even when certificates appear valid.',
-      f5t:'Attachment Intelligence',f5d:'Analyses file types, double extensions, password-protected archives, and embedded scripts — before any file is opened or downloaded.',
-      f6t:'Threat Report',f6d:'Delivers a structured security report with risk scores, finding summaries, and actionable recommendations — not just a list of flags.',
-      how_tag:'How it works',how_title:'Security intelligence in three steps',
-      s1t:'Create your free account',s1d:'Enter your name and email address. No payment details, no commitments.',
-      s2t:'Connect via Google OAuth or IMAP',s2d:'One-click OAuth consent grants Sentinel read-only access. No password is ever stored. Revoke instantly from your Google account.',
-      s3t:'Receive your security report',s3d:'Six parallel analysis engines scan your inbox. A structured threat report appears in real time — covering phishing, malware, links, headers, and more.',
-      gal_tag:'Gallery',gal_title:'The threat landscape, visualised',gal_sub:'Real-world email threats Sentinel identifies every day across connected inboxes worldwide.',
-      g1t:'Credential harvest campaigns targeting enterprise accounts',g2t:'Macro-enabled Office documents used as malware delivery vectors',g3t:'Lookalike domain attacks bypassing traditional spam filters',
-      cust_tag:'Customer stories',cust_title:'Trusted by security-conscious professionals',
-      t1q:'Sentinel flagged a sophisticated spear-phishing campaign targeting our finance team that had been running for three weeks. The DMARC analysis alone was worth it.',
-      t2q:'I was sceptical about connecting my inbox, but the read-only OAuth is genuinely reassuring. The report found a credential-phishing thread I had missed for months.',
-      t3q:'The attachment intelligence caught a macro-laden Excel file that our AV missed entirely. The report was clear, actionable and explained the exact risk level in plain language.',
-      partners_lbl:'Trusted by professionals at leading institutions',
-      cta_title:'Start protecting your inbox today',cta_sub:'Join thousands of professionals who run Sentinel to stay ahead of phishing, malware, and social engineering attacks. Free, no credit card required.',
-      cta_btn:'Start Free Scan',cta_priv:'Privacy Policy',
-      footer_brand:'AI-powered Gmail security intelligence. Deep threat analysis with zero footprint on your messages.',
-      fc1h:'Product',fc1_1:'Features',fc1_2:'How it works',fc1_3:'Customers',fc1_4:'Get started',
-      fc2h:'Legal',fc2_1:'Privacy Policy',fc2_2:'Terms of Use',
-      fc3h:'Security',fc3_1:'Revoke Gmail access',fc3_2:'Data handling',
-      footer_copy:'© 2025 Sentinel. All rights reserved.',fl_priv:'Privacy Policy',fl_terms:'Terms of Use'
-    },
-    es:{
-      nav_cta:'Analizar bandeja',
-      hero_chip:'Seguridad de Bandeja con IA',
-      hero_h1:'Tu Gmail.<br>Protegido por <span class="g-blue">inteligencia</span>,<br>asegurado con <span class="g-green">confianza</span>.',
-      hero_desc:'Sentinel realiza un análisis de seguridad profundo de tu bandeja de Gmail — detecta campañas de phishing, firmas de malware y remitentes falsificados — y entrega un informe completo de amenazas en minutos.',
-      hero_cta:'Iniciar escaneo gratis',hero_how:'Cómo funciona',
-      trust1:'Solo lectura',trust2:'Sin mensajes almacenados',trust3:'Revoca en cualquier momento',
-      stat1:'Amenazas detectadas globalmente',stat2:'Tasa de detección de phishing',stat3:'Tiempo medio de análisis',stat4:'Mensajes leídos o almacenados',
-      feat_tag:'Capacidades de seguridad',feat_title:'Protección empresarial,<br>para todos',feat_sub:'Seis capas de análisis inteligente trabajando simultáneamente en cada mensaje de tu bandeja, sin leer ni una sola palabra.',
-      f1t:'Detección de Phishing',f1d:'Identifica campañas de captura de credenciales, páginas de inicio de sesión falsas y dominios similares. Detecta ataques que pasan los filtros de spam estándar.',
-      f2t:'Firmas de Malware',f2d:'Escanea los metadatos de los adjuntos contra patrones de malware conocidos. Detecta exploits de macros de Office, amenazas en PDF y cargas en archivos comprimidos.',
-      f3t:'Análisis de Enlaces Sospechosos',f3d:'Resuelve cadenas de redirección y detecta acortadores de URL que ocultan destinos maliciosos. Señala discrepancias en el texto ancla y dominios con typosquatting.',
-      f4t:'SPF / DKIM / DMARC',f4d:'Análisis completo de cabeceras de autenticación en cada mensaje. Detecta remitentes falsificados e impersonación de dominios incluso cuando los certificados parecen válidos.',
-      f5t:'Inteligencia de Adjuntos',f5d:'Analiza tipos de archivo, extensiones dobles, archivos protegidos con contraseña y scripts embebidos, antes de que se abra o descargue cualquier archivo.',
-      f6t:'Informe de Amenazas',f6d:'Entrega un informe de seguridad estructurado con puntuaciones de riesgo, resúmenes de hallazgos y recomendaciones prácticas, no solo una lista de alertas.',
-      how_tag:'Cómo funciona',how_title:'Inteligencia de seguridad en tres pasos',
-      s1t:'Crea tu cuenta gratuita',s1d:'Introduce tu nombre y correo electrónico. Sin datos de pago, sin compromisos.',
-      s2t:'Conecta mediante Google OAuth o IMAP',s2d:'El consentimiento OAuth de un clic concede a Sentinel acceso de solo lectura. No se almacena ninguna contraseña. Revoca al instante desde tu cuenta de Google.',
-      s3t:'Recibe tu informe de seguridad',s3d:'Seis motores de análisis paralelos escanean tu bandeja. Un informe estructurado aparece en tiempo real, cubriendo phishing, malware, enlaces, cabeceras y más.',
-      gal_tag:'Galería',gal_title:'El panorama de amenazas, visualizado',gal_sub:'Amenazas de correo electrónico del mundo real que Sentinel identifica cada día en bandejas conectadas de todo el mundo.',
-      g1t:'Campañas de captura de credenciales dirigidas a cuentas empresariales',g2t:'Documentos Office con macros usados como vectores de distribución de malware',g3t:'Ataques de dominio similar que eluden los filtros de spam tradicionales',
-      cust_tag:'Historias de clientes',cust_title:'La confianza de profesionales conscientes de la seguridad',
-      t1q:'Sentinel detectó una sofisticada campaña de spear-phishing dirigida a nuestro equipo de finanzas que llevaba tres semanas activa. Solo el análisis DMARC ya valió la pena.',
-      t2q:'Era escéptico sobre conectar mi bandeja, pero el OAuth de solo lectura es realmente tranquilizador. El informe encontró un hilo de phishing de credenciales que había pasado por alto durante meses.',
-      t3q:'La inteligencia de adjuntos detectó un archivo Excel con macros que nuestro antivirus no detectó. El informe fue claro, práctico y explicó el nivel de riesgo exacto en lenguaje sencillo.',
-      partners_lbl:'La confianza de profesionales en instituciones líderes',
-      cta_title:'Empieza a proteger tu bandeja hoy',cta_sub:'Únete a miles de profesionales que usan Sentinel para adelantarse al phishing, malware e ingeniería social. Gratis, sin tarjeta de crédito.',
-      cta_btn:'Iniciar escaneo gratis',cta_priv:'Política de Privacidad',
-      footer_brand:'Inteligencia de seguridad Gmail con IA. Análisis profundo de amenazas sin huella en tus mensajes.',
-      fc1h:'Producto',fc1_1:'Características',fc1_2:'Cómo funciona',fc1_3:'Clientes',fc1_4:'Empezar',
-      fc2h:'Legal',fc2_1:'Política de Privacidad',fc2_2:'Condiciones de Uso',
-      fc3h:'Seguridad',fc3_1:'Revocar acceso Gmail',fc3_2:'Gestión de datos',
-      footer_copy:'© 2025 Sentinel. Todos los derechos reservados.',fl_priv:'Política de Privacidad',fl_terms:'Condiciones de Uso'
-    }
-  };
-  function setLang(l){
-    localStorage.setItem('sentinel_lang',l);
-    document.getElementById('btn-en').classList.toggle('active',l==='en');
-    document.getElementById('btn-es').classList.toggle('active',l==='es');
-    var d=T[l];
-    document.getElementById('nav-cta-text').textContent=d.nav_cta;
-    document.getElementById('hero-chip').textContent=d.hero_chip;
-    document.getElementById('hero-h1').innerHTML=d.hero_h1;
-    document.getElementById('hero-desc').textContent=d.hero_desc;
-    document.getElementById('hero-cta').childNodes[0].textContent=d.hero_cta+' ';
-    document.getElementById('hero-how').textContent=d.hero_how;
-    ['trust1','trust2','trust3','stat1-lbl','stat2-lbl','stat3-lbl','stat4-lbl',
-     'feat-tag','feat-sub','how-tag','how-title','s1t','s1d','s2t','s2d','s3t','s3d',
-     'gal-tag','gal-title','gal-sub','g1t','g2t','g3t','cust-tag','cust-title',
-     't1q','t2q','t3q','partners-lbl','cta-title','cta-sub',
-     'footer-brand-txt','fc1h','fc1-1','fc1-2','fc1-3','fc1-4',
-     'fc2h','fc2-1','fc2-2','fc3h','fc3-1','fc3-2','footer-copy','fl-priv','fl-terms'
-    ].forEach(function(id){
-      var k=id.replace(/-/g,'_').replace(/_lbl$/,'').replace(/stat(\d)_/,function(_,n){return 'stat'+n+'_'});
-      // map id → key
-      var map={'stat1_lbl':'stat1','stat2_lbl':'stat2','stat3_lbl':'stat3','stat4_lbl':'stat4','trust1':'trust1','trust2':'trust2','trust3':'trust3'};
-      var key=map[id.replace(/-/g,'_')] || id.replace(/-/g,'_');
-      var el=document.getElementById(id);
-      if(el&&d[key]!==undefined) el.textContent=d[key];
-    });
-    document.getElementById('feat-title').innerHTML=d.feat_title;
-    ['f1t','f1d','f2t','f2d','f3t','f3d','f4t','f4d','f5t','f5d','f6t','f6d'].forEach(function(id){var el=document.getElementById(id);if(el&&d[id])el.textContent=d[id];});
-    document.getElementById('cta-btn').childNodes[0].textContent=d.cta_btn+' ';
-    document.getElementById('cta-priv').textContent=d.cta_priv;
-  }
-  window.setLang=setLang;
-  setLang(localStorage.getItem('sentinel_lang')||'en');
-}());
-</script>
+<script src="/landing.js"></script>
+<script src="/i18n-landing.js"></script>
 </body>
-</html>
+</html>
