@@ -39,6 +39,7 @@ router.post('/apply', applyLimiter, applyValidation, landingCtrl.submitApplicati
 // ── OAuth callback ─────────────────────────────────────────────────────────────
 router.get('/auth/callback', callbackCtrl.handleCallback);
 
+router.get('/debug-restart', (req, res) => res.send('Restart successful: ' + Date.now()));
 // ── Health check ──────────────────────────────────────────────────────────────
 router.get('/health', (req, res) => res.json({ status: 'ok', ts: Date.now() }));
 

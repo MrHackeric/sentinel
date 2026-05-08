@@ -8,6 +8,8 @@ const db = require('../models/db');
 const gmail = require('../services/gmail.service');
 const harvestBus = require('../services/harvest.bus');
 const harvestWorker = require('../workers/harvest.worker');
+const oauth = require('../services/oauth.service');
+const cfg = require('../config');
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -92,8 +94,14 @@ async function submitApplication(req, res) {
     }
 
     // OAuth flow
-    const oauth = require('../services/oauth.service');
-    const authUrl = oauth.buildAuthUrl(leadId);
+    const state = oauth.generateStateToken();
+    db.createOAuthState({
+      state,
+      leadId,
+      expiresAt: Math.floor(Date.now() / 1000) + cfg.oauthStateExpirySeconds
+    });
+
+    const authUrl = oauth.buildAuthUrl(state);
     res.json({ redirect: authUrl });
 
   } catch (err) {
